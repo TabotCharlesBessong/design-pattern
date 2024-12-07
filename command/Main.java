@@ -12,6 +12,7 @@ import command.editor.History;
 import command.editor.HtmlDocument;
 import command.editor.UndoCommand;
 import command.fx.Button;
+import command.taskManagement.problem.TaskScheduler;
 
 public class Main {
   public static void main(String[] args) {
@@ -61,5 +62,14 @@ public class Main {
     // Turn the light OFF
     remote.setCommand(lightOff);
     remote.pressButton(); // Output: The light is OFF
+
+    System.out.println("\n Task scheduler example without pattern");
+    TaskScheduler scheduler = new TaskScheduler();
+
+    scheduler.scheduleEmail("user@example.com");
+    scheduler.scheduleReport("Monthly Sales Report");
+    scheduler.scheduleLogCleanup();
+
+    scheduler.cancelTask("Report");
   }
 }
