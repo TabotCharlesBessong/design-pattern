@@ -12,7 +12,11 @@ import command.editor.History;
 import command.editor.HtmlDocument;
 import command.editor.UndoCommand;
 import command.fx.Button;
-import command.taskManagement.problem.TaskScheduler;
+// import command.taskManagement.problem.TaskScheduler;
+import command.taskManagement.solution.EmailTask;
+import command.taskManagement.solution.LogCleanupTask;
+import command.taskManagement.solution.ReportTask;
+import command.taskManagement.solution.TaskScheduler;
 
 public class Main {
   public static void main(String[] args) {
@@ -63,13 +67,26 @@ public class Main {
     remote.setCommand(lightOff);
     remote.pressButton(); // Output: The light is OFF
 
-    System.out.println("\n Task scheduler example without pattern");
+    // System.out.println("\n Task scheduler example without pattern");
+    // TaskScheduler scheduler = new TaskScheduler();
+
+    // scheduler.scheduleEmail("user@example.com");
+    // scheduler.scheduleReport("Monthly Sales Report");
+    // scheduler.scheduleLogCleanup();
+
+    // scheduler.cancelTask("Report");
+
+    System.out.println("\n Task scheduler example with pattern");
     TaskScheduler scheduler = new TaskScheduler();
 
-    scheduler.scheduleEmail("user@example.com");
-    scheduler.scheduleReport("Monthly Sales Report");
-    scheduler.scheduleLogCleanup();
+    EmailTask emailTask = new EmailTask("user@example.com");
+    ReportTask reportTask = new ReportTask("Monthly Sales Report");
+    LogCleanupTask logCleanupTask = new LogCleanupTask();
 
-    scheduler.cancelTask("Report");
+    scheduler.addTask(emailTask); // Output: Sending email to: user@example.com
+    scheduler.addTask(reportTask); // Output: Generating report: Monthly Sales Report
+    scheduler.addTask(logCleanupTask); // Output: Cleaning up logs
+
+    scheduler.cancelTask(reportTask); // Output: Canceling report generation: Monthly Sales Report
   }
 }
