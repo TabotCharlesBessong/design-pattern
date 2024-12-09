@@ -1,7 +1,9 @@
 package observer;
 
-import observer.Market.problem.Investor;
-import observer.Market.problem.StockMarket;
+import observer.Market.solution.Investor;
+import observer.Market.solution.StockMarket;
+// import observer.Market.problem.Investor;
+// import observer.Market.problem.StockMarket;
 import observer.weather.solution.WeatherDisplay;
 import observer.weather.solution.WeatherStation;
 
@@ -27,16 +29,27 @@ public class Main {
     station.setTemperature(30.0);
     System.out.println("Station: " + display1 + ", " + display2);
 
+    // StockMarket market = new StockMarket();
+    // Investor investor1 = new Investor("Alice");
+    // Investor investor2 = new Investor("Bob");
+
+    // market.setStockPrice(100.50);
+    // investor1.checkStockPrice(market);
+    // investor2.checkStockPrice(market);
+
+    // market.setStockPrice(105.75);
+    // investor1.checkStockPrice(market); // Investors must manually check
+    // investor2.checkStockPrice(market);
+
     StockMarket market = new StockMarket();
+
     Investor investor1 = new Investor("Alice");
     Investor investor2 = new Investor("Bob");
 
-    market.setStockPrice(100.50);
-    investor1.checkStockPrice(market);
-    investor2.checkStockPrice(market);
+    market.addObserver(investor1);
+    market.addObserver(investor2);
 
-    market.setStockPrice(105.75);
-    investor1.checkStockPrice(market); // Investors must manually check
-    investor2.checkStockPrice(market);
+    market.setStockPrice(100.50); // Both investors notified
+    market.setStockPrice(105.75); // Both investors notified
   }
 }
